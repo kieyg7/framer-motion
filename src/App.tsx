@@ -1,46 +1,33 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import './styles/reset.css';
 import styled, {createGlobalStyle} from 'styled-components'
 import {motion} from "framer-motion";
 
 const boxVariants = {
-  start: {opacity: 0, scale: 0},
-  end: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type:'spring',
-      duration: 0.5,
-      bounce: 0.5,
-      staggerChildren: 0.2,
-    }}
+  hover: {scale: 1.5, rotateZ: 90},
+  click: {scale: 1, borderRadius: "50%"},
+  drag: {backgroundColor: "rgb(46, 204, 133)", transition: {duration: 3}},
 }
 
-const circleVariants = {
-  start: {
-    opacity: 0,
-    y: 10,
-  },
-  end: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1
-    }
-  }
-}
 
 function App() {
+  const biggerBoxRef = useRef<HTMLDivElement>(null);
   return (
     <div className="App">
       <GlobalStyle />
       <Wrapper>
-        <Box variants={boxVariants} initial="start" animate="end">
-          <Circle variants={circleVariants}/>
-          <Circle variants={circleVariants}/>
-          <Circle variants={circleVariants}/>
-          <Circle variants={circleVariants}/>
-        </Box>
+        <BiggerBox ref={biggerBoxRef}>
+          <Box
+            variants={boxVariants}
+            whileHover="hover"
+            whileTap="click"
+            whileDrag="drag"
+            drag
+            dragConstraints={biggerBoxRef}
+            dragSnapToOrigin
+            dragElastic={0}
+          />
+        </BiggerBox>
       </Wrapper>
     </div>
   );
@@ -73,19 +60,19 @@ const Wrapper = styled.div`
 const Box = styled(motion.div)`
   width: 200px;
   height: 200px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 40px;
   box-shadow: 0 2px 3px rgba(0,0,0,0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 `
 
-const Circle = styled(motion.div)`
-  width: 70px;
-  height: 70px;
-  border-radius:  35px;
-  background-color: white;
-  place-self: center;
+const BiggerBox = styled.div`
+  width: 600px;
+  height: 600px;
+  background-color: rgba(255, 255, 255, .4);
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 `
-
 export default App;
