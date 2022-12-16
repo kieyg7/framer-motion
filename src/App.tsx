@@ -5,45 +5,60 @@ import {motion, AnimatePresence} from "framer-motion";
 
 function App() {
 
-  const [showing, setShowing] = useState(false);
-  const toggleShowing = () => {
-    setShowing(!showing);
+  const [visible, setVisible] = useState(1);
+
+  const [direction, setDirection] = useState(true)
+
+  const next = () => {
+    setDirection(true);
+    setVisible((prev) => prev === 10 ? 10 : prev + 1)
+  }
+  const prev = () => {
+    setDirection(false);
+    setTimeout(() => setVisible((prev) => prev === 1 ? 1 : prev - 1), 10)
+
   }
 
   const boxVariants = {
-    initial: {
+    entry: (direction: boolean) => ({
+      x: direction ? 500 : -500,
       opacity: 0,
       scale: 0,
-      y: -500,
-    },
-    visible: {
+      transition: {duration: 0.5, delay: 0.1}
+    }),
+    center: {
+      x: 0,
       opacity: 1,
       scale: 1,
-      rotateZ: 360,
-      y: 0,
+      // transition: {duration: 1}
     },
-    leaving: {
+    exit: (direction: boolean) => ({
+      x: direction ? -500 : 500,
       opacity: 0,
       scale: 0,
-      y: -500,
-      transition: {duration: .5}
-    }
+      transition: {duration: 0.5, delay: 0.1}
+    })
   }
 
   return (
     <div className="App">
       <GlobalStyle />
       <Wrapper>
-        <button onClick={toggleShowing}>Toggle</button>
-        <AnimatePresence>{showing
-          ? <Box
+        <AnimatePresence custom={direction} mode="popLayout">
+          <Box
+              custom={direction}
               variants={boxVariants}
-              initial={"initial"}
-              animate={"visible"}
-              exit={"leaving"}
+              initial='entry'
+              animate="center"
+              exit='exit'
               transition={{type:"spring", bounce: 0.3}}
-          />
-          : null}</AnimatePresence>
+              key={visible}
+            >
+            {visible}
+          </Box>
+          </AnimatePresence>
+        <button onClick={prev}>Prev</button>
+        <button onClick={next}>Next</button>
       </Wrapper>
     </div>
   );
@@ -72,10 +87,10 @@ const Wrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
   button {
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    //position: absolute;
+    //top: 50px;
+    //left: 50%;
+    //transform: translateX(-50%);
   }
 `
 
@@ -85,6 +100,13 @@ const Box = styled(motion.div)`
    background-color: white;
    border-radius: 15px;
    box-shadow: 0 2px 3px rgba(0,0,0,0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  position: absolute;
+  top: 100px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
  `
 
 
