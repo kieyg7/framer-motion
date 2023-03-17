@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/%22https://kieyg7.github.io/framer-motion/static/css/main.cc435e0e.css",
-    "main.js": "/%22https://kieyg7.github.io/framer-motion/static/js/main.3a390d15.js",
-    "static/js/787.8c801dae.chunk.js": "/%22https://kieyg7.github.io/framer-motion/static/js/787.8c801dae.chunk.js",
-    "index.html": "/%22https://kieyg7.github.io/framer-motion/index.html",
-    "main.cc435e0e.css.map": "/%22https://kieyg7.github.io/framer-motion/static/css/main.cc435e0e.css.map",
-    "main.3a390d15.js.map": "/%22https://kieyg7.github.io/framer-motion/static/js/main.3a390d15.js.map",
-    "787.8c801dae.chunk.js.map": "/%22https://kieyg7.github.io/framer-motion/static/js/787.8c801dae.chunk.js.map"
+    "main.css": "/framer-motion/static/css/main.cc435e0e.css",
+    "main.js": "/framer-motion/static/js/main.f392ae7b.js",
+    "static/js/787.8c801dae.chunk.js": "/framer-motion/static/js/787.8c801dae.chunk.js",
+    "index.html": "/framer-motion/index.html",
+    "main.cc435e0e.css.map": "/framer-motion/static/css/main.cc435e0e.css.map",
+    "main.f392ae7b.js.map": "/framer-motion/static/js/main.f392ae7b.js.map",
+    "787.8c801dae.chunk.js.map": "/framer-motion/static/js/787.8c801dae.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cc435e0e.css",
-    "static/js/main.3a390d15.js"
+    "static/js/main.f392ae7b.js"
   ]
 }
